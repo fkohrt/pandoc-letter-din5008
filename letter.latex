@@ -8,12 +8,24 @@
     version=last         % latest version of KOMA letter
 ]{scrlttr2}
 
-\usepackage[ngerman]{babel}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
 
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+% pdflatex
+%\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+
+% lualatex
+\usepackage{fontspec}
+\usepackage[ngerman]{babel}
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+\usepackage{microtype}
+
+% https://tex.stackexchange.com/a/417883
+\directlua{dofile('/home/jovyan/letter.git/pandoc-letter-din5008/hyphenateall.lua')}
+
+\usepackage{hyperref}
 \hypersetup{
+  pdfencoding=auto,
 $if(subject)$
   pdftitle={$subject$},
 $endif$
